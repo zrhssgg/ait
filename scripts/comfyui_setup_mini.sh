@@ -112,7 +112,7 @@ main() {
     log_info "安装完成"
     echo -e "${GREEN}安装完成${NC}"
     echo "================================================"
-    echo -e "${BLUE}请使用 bash $WORK_DIR/$PROJECT_NAME/main.py 启动ComfyUI程序${NC}"
+    echo -e "${BLUE}请使用 python $WORK_DIR/$PROJECT_NAME/main.py 启动ComfyUI程序${NC}"
     echo "================================================"
     echo -e "${PURPLE}可使用 ngrok 暴露端口，使用方法请看视频操作教程 ${NC}"
 }

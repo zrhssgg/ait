@@ -12,8 +12,14 @@ export NGROK_TOKEN=""
 # CUDA 和 PyTorch 更新开关
 export CUDA_PYTORCH=false
 
-# 模型下载开关
+# 模型下载配置
 export DOWNLOAD_MODELS=false
+
+# 模型平台配置
+export USE_HUGGINGFACE=true
+export USE_MODELSCOPE=true
+export HF_TOKEN=""          # HuggingFace token
+export MODELSCOPE_TOKEN=""  # ModelScope token
 
 # 目录配置
 export LOG_DIR="$WORK_DIR/logs"
@@ -40,10 +46,14 @@ export REPO_URLS=(
 )
 
 # 模型配置
-export MODEL_VERSIONS=(
-    ["sd_v15"]="v1-5-pruned-emaonly.safetensors"
-    ["vae"]="vae-ft-mse-840000-ema-pruned.safetensors"
-    ["controlnet"]="control_v11p_sd15_canny.pth"
+export MODEL_SOURCES=(
+    # HuggingFace模型
+    ["sd_v15_hf"]="huggingface:runwayml/stable-diffusion-v1-5:v1-5-pruned-emaonly.safetensors:checkpoints"
+    ["vae_hf"]="huggingface:stabilityai/sd-vae-ft-mse:vae-ft-mse-840000-ema-pruned.safetensors:vae"
+    
+    # ModelScope模型
+    ["sd_v15_ms"]="modelscope:AI-ModelScope/stable-diffusion-v1-5:v1-5-pruned-emaonly.safetensors:checkpoints"
+    ["controlnet_ms"]="modelscope:damo/cv_controlnet_canny:control_v11p_sd15_canny.pth:controlnet"
 )
 
 # 系统要求
@@ -54,4 +64,4 @@ export REQUIRED_CUDA="11.8"
 # 功能开关
 export ENABLE_AUTO_UPDATE=true
 export ENABLE_BACKUP=true
-export ENABLE_MONITORING=true 
+export ENABLE_MONITORING=true
