@@ -6,6 +6,18 @@
 # 用法:
 # bash comfyui_install.sh
 
+apt update
+apt install -y curl
+
+# 安装 ngrok
+log_info "安装 ngrok..."
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+	| tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+	&& echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+	| tee /etc/apt/sources.list.d/ngrok.list \
+	&& apt update \
+	&& apt install ngrok
+
 # 获取脚本所在目录的绝对路径
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
@@ -84,14 +96,7 @@ run_installation() {
     # COMFYUI_INSTALL
     bash "$WORK_DIR/scripts/comfyui_install_mini.sh"
 
-    # 安装 ngrok
-    log_info "安装 ngrok..."
-    curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
-        tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && \
-        echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | \
-        tee /etc/apt/sources.list.d/ngrok.list && \
-        apt update && \
-        apt install -y ngrok
+
 }
 
 # 主函数
