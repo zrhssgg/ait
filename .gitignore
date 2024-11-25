@@ -1,0 +1,113 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 虚拟环境
+venv/
+ENV/
+env/
+.env/
+.venv/
+.conda/
+conda-env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+
+# 日志文件
+*.log
+logs/
+log/
+
+# 临时文件
+tmp/
+temp/
+.tmp/
+.temp/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 模型和数据文件
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+models/
+weights/
+checkpoints/
+
+# 配置文件
+config.ini
+*.cfg
+!example.config.ini
+!default.conf
+
+# 编译文件
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+
+# 压缩包
+*.zip
+*.tar.gz
+*.rar
+*.7z
+*.gz
+
+# 数据库
+*.db
+*.sqlite
+*.sqlite3
+
+# 其他
+.coverage
+coverage/
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+.tox/
+.cache/
+node_modules/ 
+
+/scripts/cloudstudio_init.sh
+/scripts/comfyui_install.sh
+/scripts/conda.sh
+/scripts/cuda-pytorch_update.sh
+/scripts/download.sh
+/scripts/ngrok.sh
+/scripts/run.sh
+

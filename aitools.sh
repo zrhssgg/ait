@@ -1,12 +1,29 @@
 #!/bin/bash
+#
+# 文件名: aitools.sh
+# 描述: AI For U 主程序，用于管理各种 AI 工具的安装和配置
+# 作者: AI For U Team
+# 创建日期: 2024-03-20
+#
+# 依赖:
+# - utils/init.sh
+#
+# 用法:
+# bash aitools.sh
+#
+# 示例:
+# bash aitools.sh
+#
+# 返回值:
+# - 0: 成功
+# - 1: 操作失败
 
-# 设置颜色变量
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-CYAN='\033[0;36m'
-NC='\033[0m' # No Color
+
+# 导入初始化脚本
+source "./utils/init.sh"
+
+# 初始化环境
+init_script
 
 # 清屏函数
 clear_screen() {
@@ -16,64 +33,132 @@ clear_screen() {
 # 显示标题
 show_title() {
     echo -e "${CYAN}"
-    echo '    _    ___ _____ ___   ___  ____    _   _ '
-    echo '   / \  |_ _|  ___/ _ \ | _ \|  _ \  | | | |'
-    echo '  / _ \  | || |_ | | | ||   /| |_) | | | | |'
-    echo ' / ___ \ | ||  _|| |_| || |\\ |  _ <  | |_| |'
-    echo '/_/   \_\___|_|   \___/ |_| \_|_| \_\  \___/ '
+    echo '    _    ___   _____ ___  ____    _   _ '
+    echo '   / \  |_ _| |  ___/ _ \|  _ \  | | | |'
+    echo '  / _ \  | |  | |_ | | | | |_) | | | | |'
+    echo ' / ___ \ | |  |  _|| |_| |  _ <  | |_| |'
+    echo '/_/   \_\___| |_|   \___/|_| \_\  \___/ '
     echo -e "${NC}"
-    echo -e "${PURPLE}欢迎使用 AI For U 安装助手${NC}"
-    echo "----------------------------------------"
+    echo -e "${PURPLE}================================================${NC}"
+    echo -e "${BLUE}                AI For U${NC}"
+    echo -e "${PURPLE}================================================${NC}"
 }
 
 # 显示菜单
 show_menu() {
     echo -e "\n${GREEN}请选择要安装的 AI 工具：${NC}"
-    echo "1) ComfyUI - AI工作流神器"
-    echo "2) Chat TTS - AI 语音合成"
-    echo "3) Open WebUI - 最强AI对话客户端"
-    echo "4) 退出"
+    echo "----------------------------------------"
+    echo "1) ComfyUI    - AI 绘画工作流神器"
+    echo "2) Chat TTS   - AI 语音合成工具"
+    echo "3) Open WebUI - AI 对话客户端"
+    echo "4) 检查安装状态"
+    echo "5) 清理安装"
+    echo "6) 退出"
+    echo "----------------------------------------"
+}
+
+# 检查安装状态
+check_installation_status() {
+    log_info "检查安装状态..."
+    
+    # 检查 ComfyUI
+    if [ -d "$WORK_DIR/$PROJECT_NAME" ]; then
+        echo -e "${GREEN}ComfyUI 已安装${NC}"
+        echo "安装位置: $WORK_DIR/$PROJECT_NAME"
+        
+        # 检查环境
+        if conda env list | grep -q "^comfyui_env "; then
+            echo -e "${GREEN}Conda 环境已创建${NC}"
+        else
+            echo -e "${RED}Conda 环境未创建${NC}"
+        fi
+        
+        # 检查模型
+        if [ -d "$MODELS_DIR/checkpoints" ] && [ "$(ls -A $MODELS_DIR/checkpoints)" ]; then
+            echo -e "${GREEN}模型已下载${NC}"
+            echo "模型位置: $MODELS_DIR"
+        else
+            echo -e "${YELLOW}未找到模型文件${NC}"
+        fi
+    else
+        echo -e "${RED}ComfyUI 未安装${NC}"
+    fi
+}
+
+# 清理安装
+cleanup_installation() {
+    log_warning "此操作将删除所有安装文件和配置"
+    read -p "是否继续？(y/n): " confirm
+    
+    if [ "$confirm" = "y" ]; then
+        log_info "开始清理..."
+        
+        # 删除 conda 环境
+        if conda env list | grep -q "^comfyui_env "; then
+            conda deactivate
+            conda env remove -n comfyui_env -y
+        fi
+        
+        # 删除安装目录
+        if [ -d "$WORK_DIR" ]; then
+            rm -rf "$WORK_DIR"
+        fi
+        
+        # 删除配置文件
+        rm -f "$SCRIPT_DIR/config/comfyui_config.sh"
+        
+        log_info "清理完成"
+    else
+        log_info "取消清理"
+    fi
 }
 
 # 执行选择的操作
 execute_choice() {
     case $1 in
         1)
-            echo -e "\n${BLUE}正在启动 ComfyUI 安装程序...${NC}"
-            if [ -f "./comfyui_setup.sh" ]; then
-                bash ./comfyui_setup.sh
+            log_info "启动 ComfyUI 安装程序..."
+            if [ -f "./scripts/comfyui_setup.sh" ]; then
+                log_info "comfyui_setup.sh 已找到"
+                bash "./scripts/comfyui_setup.sh"
             else
-                echo -e "${RED}未找到【 comfyui 】安装脚本${NC}"
-                echo -e "${BLUE}获取脚本：https://gf.bilibili.com/item/detail/1107198073{NC}"
+                log_error "未找到安装脚本: ./scripts/comfyui_setup.sh"
             fi
             ;;
         2)
-            echo -e "\n${BLUE}正在启动 Chat TTS 安装程序...${NC}"
-            echo -e "${PURPLE}此功能正在开发中...${NC}"
+            log_info "启动 Chat TTS 安装程序..."
+            log_warning "此功能正在开发中..."
             ;;
         3)
-            echo -e "\n${BLUE}正在启动 Open WebUI 安装程序...${NC}"
-            if [ -f "./open-webui_setup.sh" ]; then
-                bash ./open-webui_setup.sh
+            log_info "启动 Open WebUI 安装程序..."
+            if [ -f "./scripts/open-webui_setup.sh" ]; then
+                log_info "open-webui_setup.sh 已找到"
+                bash "./scripts/open-webui_setup.sh"
             else
-                echo -e "${RED}未找到【 open-webui 】安装脚本${NC}"
-                echo -e "${BLUE}获取脚本：https://gf.bilibili.com/item/detail/1107198073{NC}"
+                log_error "未找到安装脚本: ./scripts/open-webui_setup.sh"
             fi
             ;;
         4)
-            echo -e "\n${GREEN}感谢使用 ai来事|aitools 安装助手！${NC}"
+            check_installation_status
+            ;;
+        5)
+            cleanup_installation
+            ;;
+        6)
+            log_info "感谢使用 AI For U 安装助手！"
             exit 0
             ;;
         *)
-            echo -e "\n${GREEN}感谢使用 ai来事|aitools 安装助手！${NC}"
-            echo -e "${RED}无效的选择，请重试${NC}"
-            echo -e "${BLUE}详情请查看：https://gf.bilibili.com/item/detail/1107198073${NC}"
+            log_error "无效的选择，请重试"
             ;;
     esac
 }
 
 # 主程序循环
 main() {
+    # 初始化日志
+    init_logging
+    
     while true; do
         clear_screen
         show_title
@@ -84,8 +169,10 @@ main() {
         
         execute_choice $choice
         
-        echo -e "\n${BLUE}按回车键继续...${NC}"
-        read
+        if [ "$choice" != "6" ]; then
+            echo -e "\n${BLUE}按回车键返回主菜单...${NC}"
+            read
+        fi
     done
 }
 
