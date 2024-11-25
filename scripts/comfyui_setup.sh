@@ -70,10 +70,10 @@ run_installation() {
     mkdir -p "$WORK_DIR" "$LOG_DIR"
     mkdir -p "$WORK_DIR"/{scripts,utils,config,logs}
     
-    # 复制必要文件
+    # 复制必要文件,如果文件存在，则不进行覆盖
     log_info "复制必要文件..."
-    cp -r "$ROOT_DIR/scripts" "$WORK_DIR/"
-    cp -r "$ROOT_DIR/utils" "$WORK_DIR/"
+    cp -rn "$ROOT_DIR/scripts" "$WORK_DIR/"
+    cp -rn "$ROOT_DIR/utils" "$WORK_DIR/"
     chmod +x "$WORK_DIR/scripts"/*.sh
     
     # 复制脚本文件

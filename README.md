@@ -24,9 +24,8 @@
 
 1. **克隆仓库**：
     ```bash
-    git clone 
-    git clone https://github.com/aigem/comfyui-cn.git
-    cd comfyui-cn
+    git clone https://github.com/aigem/aitools.git
+    cd aitools
     ```
 
 2. **运行安装脚本**：

@@ -7,7 +7,7 @@ export CONDA_ENV_NAME="comfyui_env"
 export PYTHON_VERSION="3.12"
 
 # ngrok token
-export NGROK_TOKEN=2oksbatronvXqC753wXOMSMFksS_3vtfJnM8YhEYaq896D4uR
+export NGROK_TOKEN=""
 
 # CUDA 和 PyTorch 更新开关
 export CUDA_PYTORCH=false

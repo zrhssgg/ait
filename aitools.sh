@@ -118,11 +118,11 @@ execute_choice() {
     case $1 in
         1)
             log_info "启动 ComfyUI 安装程序..."
-            if [ -f "./scripts/comfyui_setup.sh" ]; then
-                log_info "comfyui_setup.sh 已找到"
-                bash "./scripts/comfyui_setup.sh"
+            if [ -f "./scripts/comfyui_setup_mini.sh" ]; then
+                log_info "comfyui_setup_mini.sh 已找到"
+                bash "./scripts/comfyui_setup_mini.sh"
             else
-                log_error "未找到安装脚本: ./scripts/comfyui_setup.sh"
+                log_error "未找到安装脚本: ./scripts/comfyui_setup_mini.sh"
             fi
             ;;
         2)
