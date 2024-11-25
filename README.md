@@ -30,6 +30,7 @@
     ```bash
              git clone https://github.com/aigem/aitools.git
     国内使用：git clone https://openi.pcl.ac.cn/niubi/aitools.git
+             git clone https://gitee.com/fuliai/aitools.git
     cd aitools
     ```
 
