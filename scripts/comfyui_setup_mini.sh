@@ -55,7 +55,7 @@ run_installation() {
     
     # 验证文件复制
     local required_files=(
-        "$WORK_DIR/scripts/comfyui_install.sh"
+        "$WORK_DIR/scripts/comfyui_install_mini.sh"
         "$WORK_DIR/utils/init.sh"
         "$WORK_DIR/utils/log_utils.sh"
         "$WORK_DIR/utils/conda_utils.sh"
