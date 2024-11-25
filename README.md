@@ -5,6 +5,7 @@
 ## 功能特点
 
 - **自动化安装**：一键安装 ComfyUI等热门Ai应用 及其所有依赖，简化安装流程。
+- **一键运行**：一键运行 ComfyUI 及隧道 服务
 - **国内镜像源支持**：通过国内镜像源快速下载模型，提升下载速度。
 - **自动配置 Conda 环境**：自动创建和配置 Conda 环境，便于管理依赖。
 - **断点续传支持**：安装过程中支持断点续传，确保安装过程稳定。
@@ -13,18 +14,22 @@
 - **自动环境检测**：自动检测并配置 CUDA、PyTorch 等依赖环境。
 - **模块化设计**：各功能模块独立，便于维护和扩展。
 
-## 系统要求
+## 支持平台
+- [x] 腾讯 Cloud Studio 【免费T4 16G显存】【[视频介绍](https://www.bilibili.com/video/BV1BJmSYFE2a/)】
+- [] Google Colab
+- [] Kaggle
+- [] 启智免费算力平台 【免费A100 40G显存】【[视频介绍](https://www.bilibili.com/video/BV1an4y1X7h5/)】
 
-- **硬件要求**：
-  - NVIDIA GPU (支持 CUDA)
-  - 至少 20GB 可用磁盘空间
-  - 至少 8GB 内存
+  
 
-## 快速开始
+## 快速开始【以上为最小化安装的示范，不包含所有功能及特点】
+### 只 ComfyUI 的安装示范
+### 包含 ComfyUI + ComfyUI Manager + Ngrok + 国内环境可安装
 
 1. **克隆仓库**：
     ```bash
-    git clone https://github.com/aigem/aitools.git
+             git clone https://github.com/aigem/aitools.git
+    国内使用：git clone https://openi.pcl.ac.cn/niubi/aitools.git
     cd aitools
     ```
 
@@ -33,15 +38,9 @@
     bash aitools.sh
     ```
 
-3. **选择安装选项**：
+3. **其它说明**：
     - 在菜单中选择选项 1 (ComfyUI) 开始安装
-    - 安装过程会自动执行以下步骤：
-      1. 初始化环境
-      2. 配置 Conda 环境
-      3. 安装 CUDA 和 PyTorch
-      4. 安装 ComfyUI
-      5. 下载模型（可选）
-      6. 启动服务
+    - 启动服务
 
 ## 安装流程详解
 
