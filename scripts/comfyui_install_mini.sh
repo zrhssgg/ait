@@ -40,6 +40,7 @@ install_comfyui() {
     
     log_info "安装 ComfyUI 依赖..."
     pip install -r requirements.txt
+    pip install aria2
     log_info "ComfyUI 安装成功"
 }
 

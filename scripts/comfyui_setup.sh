@@ -120,11 +120,7 @@ run_installation() {
     echo -e "${GREEN}文件复制完成${NC}"
     echo -e "${BLUE}工作目录: ${NC}${WORK_DIR}"
     echo ""
-
-    # 初始化 CloudStudio 环境
-    log_info "初始化 CloudStudio 环境..."
-    bash "$WORK_DIR/scripts/cloudstudio_init.sh"
-  
+ 
     # CONDA_SETUP
     if should_execute_step "CONDA_SETUP"; then
         log_info "开始设置 Conda 环境"
@@ -187,6 +183,10 @@ run_installation() {
         fi
     fi
     
+    # 初始化 CloudStudio 环境
+    log_info "初始化 CloudStudio 环境..."
+    bash "$WORK_DIR/scripts/cloudstudio_init.sh"
+
     # 最后一步使用 COMPLETE 状态
     if should_execute_step "COMPLETE"; then
         save_progress "COMPLETE"

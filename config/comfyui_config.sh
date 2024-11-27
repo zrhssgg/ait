@@ -13,7 +13,7 @@ export NGROK_TOKEN=""
 export CUDA_PYTORCH=false
 
 # 模型下载配置
-export DOWNLOAD_MODELS=false
+export DOWNLOAD_MODELS=true
 
 # 模型平台配置
 export USE_HUGGINGFACE=true
