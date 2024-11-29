@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# 获取脚本所在目录的绝对路径
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+
 # 先确定 ./config/comfyui_config.sh 文件是否存在。用户自行确认设置是否正确
 if [ ! -f "$ROOT_DIR/config/comfyui_config.sh" ]; then
     log_error "未找到 config/comfyui_config.sh 文件"
@@ -23,10 +27,6 @@ else
         && apt install ngrok
 fi
 
-# 获取脚本所在目录的绝对路径
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-ROOT_DIR="$(dirname "$SCRIPT_DIR")"
-
 # 首先导入初始化脚本和配置文件
 source "$ROOT_DIR/utils/init.sh"
 source "$ROOT_DIR/config/comfyui_config.sh"
@@ -38,6 +38,28 @@ log_info "运行 ComfyUI_setup 脚本..."
 log_info "脚本目录: $SCRIPT_DIR"
 log_info "根目录: $ROOT_DIR"
 log_info "工作目录: $WORK_DIR"
+
+# 生成一个运行程序的说明文件
+cat << EOF > "$WORK_DIR/使用说明.md"
+# ComfyUI Setup
+## 一键安装脚本
+### [获取[强化版一键安装脚本](https://gf.bilibili.com/item/detail/1107198073)](https://gf.bilibili.com/item/detail/1107198073)
+### [强化版视频教程](https://www.bilibili.com/video/BV13UBRYVEmX/)
+
+运行ComfyUI 命令
+
+`cd $WORK_DIR/ComfyUI/ && python main.py`
+
+运行Ngrok命令
+如何获取Ngrok token ,请看视频教程。[token获取网址 https://dashboard.ngrok.com/get-started/setup/linux](https://dashboard.ngrok.com/get-started/setup/linux)
+
+`ngrok http 8188`
+
+访问 Ngrok 隧道服务生成的网址
+
+[获取其它脚本请访问 https://gf.bilibili.com/item/detail/1107198073](https://gf.bilibili.com/item/detail/1107198073)
+
+EOF 
 
 run_installation() {
     # 使用进度跟踪执行安装步骤
@@ -114,13 +136,13 @@ main() {
     log_info "=== ComfyUI 安装完成 ==="
 
     # 安装完成
-    log_info "安装完成"
-    echo -e "${GREEN}安装完成${NC}"
     echo "================================================"
     echo -e "${BLUE}获取其它脚本请访问 https://gf.bilibili.com/item/detail/1107198073${NC}"
     echo -e "${BLUE}请使用 python $WORK_DIR/$PROJECT_NAME/main.py 启动ComfyUI程序${NC}"
     echo "================================================"
-    echo -e "${PURPLE}可使用 ngrok 暴露端口，使用方法请看视频操作教程 ${NC}"
+    echo -e "${PURPLE}可使用 ngrok http 8188 暴露端口，使用方法请看视频操作教程 ${NC}"
+    echo -e "${PURPLE}以上操作命令请查看 说明文件 ${NC}"
+    echo "================================================"
     
 }
 

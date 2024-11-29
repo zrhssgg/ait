@@ -82,7 +82,6 @@ main() {
     echo -e "${GREEN}安装位置: $WORK_DIR/$PROJECT_NAME${NC}"
     echo -e "${BLUE}启动命令: python $WORK_DIR/$PROJECT_NAME/main.py${NC}"
     echo -e "${BLUE}使用 ngrok 暴露端口: ngrok http $DEFAULT_PORT ${NC}"
-    echo -e "${PURPLE}更详细说明:  https://1pages.nbid.bid ${NC}"
 }
 
 # 运行主程序
