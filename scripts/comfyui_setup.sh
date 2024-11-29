@@ -84,6 +84,7 @@ run_installation() {
         "$WORK_DIR/config/comfyui_config.sh"
         "$WORK_DIR/config/supervisord.conf"
         "$WORK_DIR/scripts/cloudstudio_init.sh"
+        "$WORK_DIR/scripts/ngrok.sh"
     )
     
     local missing_files=()
