@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# 文件名: comfyui_install.sh
-# 描述: 安装 ComfyUI 及其管理器
-# 作者: ai来事
-# 用法:
-# bash comfyui_install.sh
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
+ROOT_ROOT_DIR=$(dirname "$ROOT_DIR")"
 
 # 导入初始化脚本
-source "$ROOT_DIR/utils/init.sh"
+source "$ROOT_ROOT_DIR/utils/init.sh"
 
 # 初始化环境
 init_script

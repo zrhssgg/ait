@@ -103,10 +103,4 @@ coverage/
 .cache/
 node_modules/ 
 
-/scripts/cloudstudio_init.sh
-/scripts/comfyui_install.sh
-/scripts/conda.sh
-/scripts/cuda-pytorch_update.sh
-/scripts/download.sh
-/scripts/ngrok.sh
-/scripts/run.sh
+/scripts/*/scripts/
