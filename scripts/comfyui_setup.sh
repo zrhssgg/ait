@@ -56,18 +56,12 @@ run_installation() {
     log_info "复制必要文件..."
     cp -rn "$ROOT_DIR/scripts" "$WORK_DIR/"
     cp -rn "$ROOT_DIR/utils" "$WORK_DIR/"
-    chmod +x "$WORK_DIR/scripts"/*.sh
+    cp -rn "$ROOT_DIR/config" "$WORK_DIR/"
     
-    # 复制脚本文件
-    cp "$ROOT_DIR/scripts"/*.sh "$WORK_DIR/scripts/"
+    # 设置脚本文件
     chmod +x "$WORK_DIR/scripts"/*.sh
-    
-    # 复制工具文件
-    cp "$ROOT_DIR/utils"/*.sh "$WORK_DIR/utils/"
     chmod +x "$WORK_DIR/utils"/*.sh
-    
-    # 复制配置文件
-    cp "$ROOT_DIR/config"/* "$WORK_DIR/config/"
+    chmod +x "$WORK_DIR/config"/*.sh
     
     # 验证文件复制
     local required_files=(
