@@ -56,6 +56,7 @@ run_installation() {
     # 复制必要文件,如果文件存在，则不进行覆盖
     log_info "复制必要文件..."
     cp -rn "$ROOT_DIR/scripts" "$WORK_DIR/"
+    mv "$WORK_DIR/scripts/comfyui/comfyui_install_mini.sh" "$WORK_DIR/scripts/comfyui_install_mini.sh"
     cp -rn "$ROOT_DIR/utils" "$WORK_DIR/"
     cp -rn "$ROOT_DIR/config" "$WORK_DIR/"
     
