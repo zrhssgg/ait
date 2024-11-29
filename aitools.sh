@@ -114,9 +114,9 @@ execute_choice() {
         1)
             install_1="comfyui_install_mini.sh"
             log_info "启动 ComfyUI 安装程序..."
-            if [ -f "./scripts/$install_1" ]; then
+            if [ -f "./scripts/comfyui/$install_1" ]; then
                 log_info "$install_1 已找到"
-                bash "./scripts/$install_1"
+                bash "./scripts/comfyui/$install_1"
             else
                 not_found_script "$install_1"
             fi
