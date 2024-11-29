@@ -1,22 +1,27 @@
 #!/bin/bash
 
-# 文件名: comfyui_setup.sh
-# 描述: ComfyUI 安装主程序
-# 作者: ai来事
-# 用法:
-# bash comfyui_install.sh
+# 先确定 ./config/comfyui_config.sh 文件是否存在。用户自行确认设置是否正确
+if [ ! -f "$ROOT_DIR/config/comfyui_config.sh" ]; then
+    log_error "未找到 config/comfyui_config.sh 文件"
+    exit 1
+fi
 
 apt update
 apt install -y curl
 
 # 安装 ngrok
 log_info "安装 ngrok..."
-curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
-	| tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
-	&& echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
-	| tee /etc/apt/sources.list.d/ngrok.list \
-	&& apt update \
-	&& apt install ngrok
+if command -v ngrok &> /dev/null; then
+    log_info "ngrok 已安装"
+else
+    log_info "ngrok 未安装，开始安装..."
+    curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+        | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+        && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+        | tee /etc/apt/sources.list.d/ngrok.list \
+        && apt update \
+        && apt install ngrok
+fi
 
 # 获取脚本所在目录的绝对路径
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -56,6 +61,7 @@ run_installation() {
     
     # 复制脚本文件
     cp "$ROOT_DIR/scripts"/*.sh "$WORK_DIR/scripts/"
+    cp "$ROOT_DIR/scripts/comfyui"/*.sh "$WORK_DIR/scripts/"
     chmod +x "$WORK_DIR/scripts"/*.sh
     
     # 复制工具文件
@@ -96,7 +102,6 @@ run_installation() {
     # COMFYUI_INSTALL
     bash "$WORK_DIR/scripts/comfyui_install_mini.sh"
 
-
 }
 
 # 主函数
@@ -115,6 +120,7 @@ main() {
     echo -e "${BLUE}请使用 python $WORK_DIR/$PROJECT_NAME/main.py 启动ComfyUI程序${NC}"
     echo "================================================"
     echo -e "${PURPLE}可使用 ngrok 暴露端口，使用方法请看视频操作教程 ${NC}"
+    echo -e "${BLUE}获取其它脚本请访问 https://gf.bilibili.com/item/detail/1107198073${NC}"
 }
 
 # 运行主程序

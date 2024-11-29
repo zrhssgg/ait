@@ -1,23 +1,12 @@
 #!/bin/bash
 #
 # 文件名: aitools.sh
-# 描述: AI For U 主程序，用于管理各种 AI 工具的安装和配置
-# 作者: AI For U Team
-# 创建日期: 2024-03-20
-#
-# 依赖:
-# - utils/init.sh
-#
+# 描述: AI For U 主程序，用于管理各种 AI 工具的安装和配置 【cloudstudio平台】
+# 作者: ai来事
+# 创建日期: 2024-11-28
+
 # 用法:
 # bash aitools.sh
-#
-# 示例:
-# bash aitools.sh
-#
-# 返回值:
-# - 0: 成功
-# - 1: 操作失败
-
 
 # 导入初始化脚本
 source "./utils/init.sh"
@@ -40,7 +29,7 @@ show_title() {
     echo '/_/   \_\___| |_|   \___/|_| \_\  \___/ '
     echo -e "${NC}"
     echo -e "${PURPLE}================================================${NC}"
-    echo -e "${BLUE}                AI For U${NC}"
+    echo -e "${BLUE}                AI For U | 人人皆可AI${NC}"
     echo -e "${PURPLE}================================================${NC}"
 }
 
@@ -85,6 +74,12 @@ check_installation_status() {
     fi
 }
 
+# 找不到安装脚本提示
+not_found_script() {
+    log_error "未找到安装脚本: $1"
+    echo -e "${BLUE}获取脚本请访问 https://gf.bilibili.com/item/detail/1107198073${NC}"
+}
+
 # 清理安装
 cleanup_installation() {
     log_warning "此操作将删除所有安装文件和配置"
@@ -117,12 +112,13 @@ cleanup_installation() {
 execute_choice() {
     case $1 in
         1)
+            install_1="comfyui_install_mini.sh"
             log_info "启动 ComfyUI 安装程序..."
-            if [ -f "./scripts/comfyui_setup_mini.sh" ]; then
-                log_info "comfyui_setup_mini.sh 已找到"
-                bash "./scripts/comfyui_setup_mini.sh"
+            if [ -f "./scripts/$install_1" ]; then
+                log_info "$install_1 已找到"
+                bash "./scripts/$install_1"
             else
-                log_error "未找到安装脚本: ./scripts/comfyui_setup_mini.sh"
+                not_found_script "$install_1"
             fi
             ;;
         2)
@@ -164,7 +160,7 @@ main() {
         show_title
         show_menu
         
-        echo -e "\n${GREEN}请输入选项编号：${NC}"
+        echo -e "\n${GREEN}请输入安装编号：${NC}"
         read choice
         
         execute_choice $choice
