@@ -39,28 +39,6 @@ log_info "脚本目录: $SCRIPT_DIR"
 log_info "根目录: $ROOT_DIR"
 log_info "工作目录: $WORK_DIR"
 
-# 生成一个运行程序的说明文件
-cat << EOF > "$WORK_DIR/使用说明.md"
-# ComfyUI Setup
-## 一键安装脚本
-### [获取[强化版一键安装脚本](https://gf.bilibili.com/item/detail/1107198073)](https://gf.bilibili.com/item/detail/1107198073)
-### [强化版视频教程](https://www.bilibili.com/video/BV13UBRYVEmX/)
-
-运行ComfyUI 命令
-
-`cd $WORK_DIR/ComfyUI/ && python main.py`
-
-运行Ngrok命令
-如何获取Ngrok token ,请看视频教程。[token获取网址 https://dashboard.ngrok.com/get-started/setup/linux](https://dashboard.ngrok.com/get-started/setup/linux)
-
-`ngrok http 8188`
-
-访问 Ngrok 隧道服务生成的网址
-
-[获取其它脚本请访问 https://gf.bilibili.com/item/detail/1107198073](https://gf.bilibili.com/item/detail/1107198073)
-
-EOF 
-
 run_installation() {
     # 使用进度跟踪执行安装步骤
     log_info "开始执行安装步骤..."
