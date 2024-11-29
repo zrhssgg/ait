@@ -1,22 +1,4 @@
 #!/bin/bash
-#
-# 文件名: comfyui_setup.sh
-# 描述: ComfyUI 安装主程序
-# 作者: AI For U Team
-# 创建日期: 2024-03-20
-#
-# 依赖:
-# - utils/init.sh
-#
-# 用法:
-# bash comfyui_setup.sh
-#
-# 示例:
-# bash comfyui_setup.sh
-#
-# 返回值:
-# - 0: 成功
-# - 1: 安装失败
 
 # 获取脚本所在目录的绝对路径
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
