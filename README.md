@@ -23,13 +23,20 @@
 
 1. **克隆仓库**：
     只需运行命令：
-    - `git clone https://github.com/aigem/aitools.git`
-
+    ```bash
+    git clone https://github.com/aigem/aitools.git
+    ```
     国内环境可用：
-    `git clone https://openi.pcl.ac.cn/niubi/aitools.git`
-    `git clone https://gitee.com/fuliai/aitools.git`
+    ```bash
+    git clone https://openi.pcl.ac.cn/niubi/aitools.git
+    ```
+    ```bash
+    git clone https://gitee.com/fuliai/aitools.git
+    ```
 
-    - `cd aitools && git pull`
+    ```bash
+    cd aitools && git pull
+    ```
     
 
 2. **运行安装脚本**：
@@ -46,7 +53,7 @@
     - 启动 Ngrok 隧道服务
     新开一个终端(命令行)运行 Ngrok 隧道服务
      `ngrok http 8188` 
-     
+
     - 访问 Ngrok 隧道服务生成的网址
 
 # 强化版一键安装脚本 
