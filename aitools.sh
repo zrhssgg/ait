@@ -112,7 +112,7 @@ cleanup_installation() {
 execute_choice() {
     case $1 in
         1)
-            install_1="comfyui_install_mini.sh"
+            install_1="comfyui_setup_mini.sh"
             log_info "启动 ComfyUI 安装程序..."
             if [ -f "./scripts/comfyui/$install_1" ]; then
                 log_info "$install_1 已找到"
